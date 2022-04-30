@@ -54,13 +54,15 @@ class AnnouncementDetailSerializer(DynamicFieldsModelSerializer, AnnouncementSer
 
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True)
+    images = ImageSerializer(many=True, required=False)
 
     class Meta:
         model = Announcement
         fields = ("id", "title", "price", "description", "images")
 
     def create(self, validated_data: dict[str, any]):
+        if not validated_data.get('images'):
+            return super().create(validated_data)
         images = validated_data.pop("images")
         announcement = Announcement.objects.create(**validated_data)
         for image in images[:3]:

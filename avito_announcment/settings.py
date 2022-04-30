@@ -14,7 +14,9 @@ SECRET_KEY = 'django-insecure-&iy_q(s39m)3yp6yn#o_kl*@w_k*ymhx7&!&7jq%nun=dz5!yo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0"]
+
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "http://localhost", "http://0.0.0.0"]
 
 SITE_URL = "http://127.0.0.1:8000"
 
@@ -45,7 +47,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -143,7 +147,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 JWT_AUTH_SECURE = False
 # Every time user refreshes their token, new refresh-token is provided
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=15),
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": True,
 }
@@ -163,5 +167,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
 ]
+CORS_ALLOW_CREDENTIALS = True
+

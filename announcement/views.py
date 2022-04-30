@@ -13,7 +13,6 @@ class AnnouncementViewSet(
 ):
     queryset = Announcement.objects.all()
     serializer_class = AnnouncementSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     action_serializer_classes_mapping = {
         "list": AnnouncementSerializer,
         "retrieve": AnnouncementDetailSerializer,
